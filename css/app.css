@@ -484,7 +484,7 @@ table { border-collapse: collapse; width: 100%; }
 .tips-card li::before { content: ""; position: absolute; left: 2px; top: 8.5px; width: 4px; height: 4px; border-radius: 50%; background: var(--brand-400); }
 
 .quote-card { margin-top: 14px; text-align: center; padding: 14px 10px 4px; }
-.quote-card p { font-family: var(--font-serif); font-size: 12px; letter-spacing: .16em; color: var(--ink-500); line-height: 1.95; }
+.quote-card p { font-family: var(--font-serif); font-size: 11px; letter-spacing: .16em; color: var(--ink-500); line-height: 1.95; }
 .quote-card span { display: block; font-family: var(--font-serif); font-size: 11px; letter-spacing: .1em; color: var(--ink-400); margin-top: 5px; }
 
 /* 我的预约 */
