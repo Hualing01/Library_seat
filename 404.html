@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图书馆阅览座位预约系统 · 高保真原型</title>
+<meta name="author" content="Seat Reservation Prototype">
+<link rel="stylesheet" href="./css/app.css">
+</head>
+<body>
+<div class="stage" id="stage">
+
+  <div class="stage-head is-hidden" id="stageHead">
+    <div class="logo-row">
+      <div class="logo-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.04A8.97 8.97 0 0 0 6 3.75c-1.05 0-2.06.18-3 .51v14.25A8.99 8.99 0 0 1 6 18c2.3 0 4.41.87 6 2.29m0-14.25a8.97 8.97 0 0 1 6-2.29c1.05 0 2.06.18 3 .51v14.25A8.99 8.99 0 0 0 18 18a8.97 8.97 0 0 0-6 2.29m0-14.25v14.25"/></svg>
+      </div>
+      <h1>图书馆阅览座位预约系统</h1>
+    </div>
+    <p>高保真交互原型 · 可点击跳转 / 可离线运行</p>
+    <div class="stage-meta">
+      <span>高保真交互原型</span><span>学生端 + 管理员端</span><span>共 <b id="pageTotal">18</b> 个页面</span>
+    </div>
+    <div class="stage-tools">
+      <button class="theme-toggle" data-action="toggle-theme">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span id="themeLabel">切换深色模式</span>
+      </button>
+      <button class="theme-toggle" data-action="toggle-anno">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 16v-4m0-4h.01M12 3l9 16H3z"/></svg>
+        <span>页面清单</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="phone" id="phone">
+    <div class="phone__notch"></div>
+    <div class="phone__statusbar">
+      <span id="clockText">9:41</span>
+      <span class="sb-right">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="currentColor"><rect x="0" y="7.5" width="3" height="4.5" rx="1"/><rect x="4.5" y="5" width="3" height="7" rx="1"/><rect x="9" y="2.5" width="3" height="9.5" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg>
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><path d="M8 11.2 1.1 4.3a9.8 9.8 0 0 1 13.8 0L8 11.2z" opacity=".95"/></svg>
+        <svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x=".8" y=".8" width="19" height="10.4" rx="3" stroke="currentColor" stroke-width="1.1" opacity=".5"/><rect x="2.4" y="2.4" width="14" height="7.2" rx="1.8" fill="currentColor"/><path d="M21.4 4.2v3.6a2.1 2.1 0 0 0 0-3.6z" fill="currentColor" opacity=".5"/></svg>
+      </span>
+    </div>
+    <div class="phone__screen" id="screen">
+
+      <!-- ===================== 1. 登录页 ===================== -->
+      <section class="page is-active" data-page="login">
+        <div class="page__body">
+          <div class="login-hero">
+            <div class="login-hero__mark">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.04A8.97 8.97 0 0 0 6 3.75c-1.05 0-2.06.18-3 .51v14.25A8.99 8.99 0 0 1 6 18c2.3 0 4.41.87 6 2.29m0-14.25a8.97 8.97 0 0 1 6-2.29c1.05 0 2.06.18 3 .51v14.25A8.99 8.99 0 0 0 18 18a8.97 8.97 0 0 0-6 2.29m0-14.25v14.25"/></svg>
+            </div>
+            <h2>图书馆座位预约系统</h2>
+            <p>图书馆 · 阅览座位预约管理</p>
+          </div>
+          <div class="login-body">
+            <div class="login-card">
+              <div class="segmented segmented--brand" style="margin-bottom:16px">
+                <button class="segmented__item is-active" data-action="login-role" data-role="student">学生登录</button>
+                <button class="segmented__item" data-action="login-role" data-role="admin">管理员登录</button>
+              </div>
+
+              <div id="loginFormStudent">
+                <div class="field">
+                  <label class="field__label">学号</label>
+                  <div class="input-group">
+                    <span class="input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/></svg></span>
+                    <input class="input" id="stuId" value="2024010101" placeholder="请输入学号" autocomplete="off">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field__label">密码</label>
+                  <div class="input-group">
+                    <span class="input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                    <input class="input" id="stuPwd" type="password" value="123456" placeholder="请输入密码">
+                  </div>
+                </div>
+                <div class="row--between" style="margin:-4px 0 14px">
+                  <span class="xsmall muted" style="display:flex;align-items:center;gap:5px"><input type="checkbox" checked style="accent-color:var(--brand-500)">记住学号</span>
+                  <button class="xsmall" style="color:var(--brand-500);font-weight:600" data-action="open-overlay" data-overlay="forgot">忘记密码？</button>
+                </div>
+                <button class="btn btn--primary btn--block btn--lg" data-action="student-login">登 录</button>
+                <div class="xsmall muted center" style="margin-top:12px;line-height:1.7">
+                  登录即接入学校统一身份认证<br>仅限在校师生使用
+                </div>
+              </div>
+
+              <div id="loginFormAdmin" class="hidden">
+                <div class="field">
+                  <label class="field__label">工号</label>
+                  <div class="input-group">
+                    <span class="input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/></svg></span>
+                    <input class="input" id="admId" value="hgu-lib-001" placeholder="请输入工号">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field__label">密码</label>
+                  <div class="input-group">
+                    <span class="input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                    <input class="input" id="admPwd" type="password" value="admin123" placeholder="请输入密码">
+                  </div>
+                </div>
+                <div class="alert alert--info" style="margin-bottom:14px">
+                  <span class="alert__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 16v-4m0-4h.01M12 3l9 16H3z"/></svg></span>
+                  <span>管理员关键操作（申诉处理、黑名单解除）需二次授权确认。</span>
+                </div>
+                <button class="btn btn--primary btn--block btn--lg" data-action="admin-login">进入管理后台</button>
+              </div>
+            </div>
+            <p class="login-role-hint">原型演示账号已预填，直接点击登录即可体验完整流程</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== 2. 学生端首页 ===================== -->
+      <section class="page" data-page="student-home">
+        <div class="page__body page__body--nav">
+          <div class="home-head">
+            <div class="home-head__top">
+              <div>
+                <div class="home-head__greet">下午好，张三</div>
+                <div class="home-head__title">今天想坐在哪里？</div>
+              </div>
+              <button class="icon-btn" data-action="go" data-target="message-list">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 0 0-4-5.66V5a2 2 0 1 0-4 0v.34C7.67 6.17 6 8.39 6 11v3.16c0 .54-.21 1.05-.6 1.44L4 17h5m6 0v1a3 3 0 1 1-6 0v-1m6 0H9"/></svg>
+                <span class="icon-btn__dot" id="msgDot"></span>
+              </button>
+            </div>
+            <div class="home-stats">
+              <div class="home-stat"><div class="home-stat__num" id="statFree">--</div><div class="home-stat__label">空闲座位</div></div>
+              <div class="home-stat"><div class="home-stat__num" id="statUsing">--</div><div class="home-stat__label">使用中</div></div>
+              <div class="home-stat"><div class="home-stat__num" id="statMine">--</div><div class="home-stat__label">我的预约</div></div>
+            </div>
+          </div>
+
+          <div class="filter-bar">
+            <div class="chip-scroll" id="floorChips"></div>
+            <div class="chip-scroll" id="roomChips"></div>
+            <div class="row--between" style="margin:2px 0 11px">
+              <span class="small bold" id="seatTitle" style="color:var(--ink-700)">--</span>
+              <div class="legend">
+                <span class="legend__item"><i class="legend__dot" style="background:linear-gradient(150deg,#34d399,#059669)"></i>空闲</span>
+                <span class="legend__item"><i class="legend__dot" style="background:linear-gradient(150deg,#fbbf24,#d97706)"></i>已预约</span>
+                <span class="legend__item"><i class="legend__dot" style="background:linear-gradient(150deg,#f87171,#dc2626)"></i>使用中</span>
+              </div>
+            </div>
+            <div class="seat-grid" id="seatGrid"></div>
+
+            <div class="tips-card">
+              <div class="tips-card__title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4m0-4h.01"/></svg>
+                预约须知
+              </div>
+              <ul>
+                <li>同一时间只能预约 1 个座位，单次时长 1—4 小时</li>
+                <li>预约开始前后 30 分钟内到馆扫码签到</li>
+                <li>超时未签到将自动释放座位并记 1 次违约</li>
+                <li>累计违约 3 次将进入黑名单，限制预约 7 天</li>
+              </ul>
+            </div>
+
+            <div class="quote-card">
+              <p>古之成大事者，不惟有超世之才，亦必有坚忍不拔之志。</p>
+              <span>—— 苏轼《晁错论》</span>
+            </div>
+          </div>
+        </div>
+        <nav class="tabbar">
+          <button class="tabbar__item is-active" data-action="go" data-target="student-home">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.6 12 3l9 7.6M5 9.6V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.6"/></svg>
+            首页
+          </button>
+          <button class="tabbar__item" data-action="go" data-target="my-reservation">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/></svg>
+            我的预约
+          </button>
+          <button class="tabbar__item" data-action="go" data-target="profile">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM12 14a7 7 0 0 0-7 7h14a7 7 0 0 0-7-7z"/></svg>
+            个人中心
+          </button>
+        </nav>
+      </section>
+
+      <!-- ===================== 3. 座位详情（底部抽屉） ===================== -->
+      <section class="page" data-page="seat-detail">
+        <div class="navbar">
+          <button class="navbar__back" data-action="back"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg></button>
+          <div class="navbar__title">座位详情</div>
+          <div class="navbar__action"></div>
+        </div>
+        <div class="page__body page__body--pad stack-12" id="seatDetailBody"></div>
+      </section>
+
+      <!-- ===================== 4. 预约成功 ===================== -->
+      <section class="page" data-page="booking-success">
+        <div class="page__body success-wrap">
+          <div class="success-ring">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h2 style="font-size:19px;font-weight:700;color:var(--ink-900)">预约成功</h2>
+          <p class="small muted" style="margin-top:5px">系统已为你锁定该座位</p>
+
+          <div class="ticket">
+            <div class="ticket__row"><span class="ticket__label">座位</span><span class="ticket__value" id="okSeat">--</span></div>
+            <div class="ticket__row"><span class="ticket__label">日期</span><span class="ticket__value" id="okDate">--</span></div>
+            <div class="ticket__row"><span class="ticket__label">时段</span><span class="ticket__value" id="okTime">--</span></div>
+            <div class="ticket__row"><span class="ticket__label">状态</span><span class="badge badge--warn">待签到</span></div>
+            <div class="ticket__row"><span class="ticket__label">预约编号</span><span class="ticket__value ticket__code" id="okNo">--</span></div>
+          </div>
+
+          <div class="alert alert--warn" style="width:100%;text-align:left">
+            <span class="alert__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+            <span>请在预约开始时间前后 30 分钟内到馆扫码签到。超时未签到，系统将自动释放座位并记 1 次违约。</span>
+          </div>
+
+          <div class="btn-row" style="width:100%;margin-top:18px">
+            <button class="btn btn--ghost" data-action="go" data-target="student-home">返回首页</button>
+            <button class="btn btn--primary" data-action="go" data-target="checkin">去签到</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== 5. 签到入座 ===================== -->
+      <section class="page" data-page="checkin">
+        <div class="navbar">
+          <button class="navbar__back" data-action="back"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg></button>
+          <div class="navbar__title">扫码签到</div>
+          <div class="navbar__action"></div>
+        </div>
+        <div class="page__body">
+          <div class="checkin-wrap">
+            <div class="center" style="margin-bottom:14px">
+              <div class="xsmall muted">签到剩余时间</div>
+              <div class="countdown-big" id="cdText">29:58</div>
+            </div>
+            <div class="progress-track" style="margin-bottom:18px"><div class="progress-fill" id="cdBar" style="width:100%"></div></div>
+
+            <div class="qr-box">
+              <svg viewBox="0 0 132 132" width="100%" height="100%" shape-rendering="crispEdges" id="qrSvg"></svg>
+            </div>
+            <p class="xsmall muted center" style="margin-top:11px;line-height:1.65">使用微信「扫一扫」扫描座位上方的二维码<br>或直接点击下方按钮模拟扫码</p>
+
+            <div style="width:100%;margin-top:16px" class="stack-10">
+              <div class="card card--plain">
+                <div class="kv-list">
+                  <div class="kv"><span class="kv__k">座位</span><span class="kv__v" id="ciSeat">A区阅览室 2F 05号</span></div>
+                  <div class="kv"><span class="kv__k">预约时段</span><span class="kv__v" id="ciTime">14:00 - 16:00</span></div>
+                  <div class="kv"><span class="kv__k">签到窗口</span><span class="kv__v" id="ciWindow">13:30 - 14:30</span></div>
+                </div>
+              </div>
+              <div class="btn-row">
+                <button class="btn btn--ghost" data-action="go" data-target="my-reservation">稍后签到</button>
+                <button class="btn btn--primary" data-action="do-checkin">模拟扫码签到</button>
+              </div>
+            </div>
+
+            <div class="scan-steps" style="margin-top:18px">
+              <div class="scan-step"><div class="scan-step__num">1</div><div class="scan-step__text">到馆后打开本页</div></div>
+              <div class="scan-step"><div class="scan-step__num">2</div><div class="scan-step__text">扫描座位二维码</div></div>
+              <div class="scan-step"><div class="scan-step__num">3</div><div class="scan-step__text">状态变为使用中</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== 6. 我的预约 ===================== -->
+      <section class="page" data-page="my-reservation">
+        <div class="navbar">
+          <div class="navbar__action" style="justify-content:flex-start"></div>
+          <div class="navbar__title">我的预约</div>
+          <div class="navbar__action">
+            <button class="navbar__back" data-action="go" data-target="message-list"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 0 0-4-5.66V5a2 2 0 1 0-4 0v.34C7.67 6.17 6 8.39 6 11v3.16c0 .54-.21 1.05-.6 1.44L4 17h5m6 0v1a3 3 0 1 1-6 0v-1m6 0H9"/></svg></button>
+          </div>
+        </div>
+        <div class="tabs">
+          <button class="tabs__item is-active" data-action="res-tab" data-tab="current">当前预约</button>
+          <button class="tabs__item" data-action="res-tab" data-tab="history">历史记录</button>
+        </div>
+        <div class="page__body page__body--pad page__body--nav" id="resList"></div>
+        <nav class="tabbar">
+          <button class="tabbar__item" data-action="go" data-target="student-home">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.6 12 3l9 7.6M5 9.6V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.6"/></svg>
+            首页
+          </button>
+          <button class="tabbar__item is-active" data-action="go" data-target="my-reservation">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/></svg>
+            我的预约
+          </button>
+          <button class="tabbar__item" data-action="go" data-target="profile">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM12 14a7 7 0 0 0-7 7h14a7 7 0 0 0-7-7z"/></svg>
+            个人中心
+          </button>
+        </nav>
+      </section>
+
+      <!-- ===================== 7. 预约历史 ===================== -->
+      <section class="page" data-page="history-list">
+        <div class="navbar">
+          <button class="navbar__back" data-action="back"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg></button>
+          <div class="navbar__title">预约历史</div>
+          <div class="navbar__action"></div>
+        </div>
+        <div class="page__body page__body--pad">
+          <div class="chip-scroll" id="historyFilters"></div>
+          <div class="timeline" id="historyList"></div>
+        </div>
+      </section>
+
+      <!-- ===================== 8. 违约记录 ===================== -->
+      <section class="page" data-page="violation-list">
+        <div class="navbar">
+          <button class="navbar__back" data-action="back"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg></button>
+          <div class="navbar__title">违约记录</div>
+          <div class="navbar__action"></div>
+        </div>
+        <div class="page__body page__body--pad stack-12">
+          <div class="card card--plain" id="violationSummary"></div>
+          <div id="violationList" class="stack-10"></div>
+        </div>
+      </section>
+
+      <!-- ===================== 9. 提交申诉 ===================== -->
+      <section class="page" data-page="appeal-submit">
+        <div class="navbar">
+          <button class="navbar__back" data-action="back"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg></button>
+          <div class="navbar__title">提交申诉</div>
+          <div class="navbar__action"></div>
+        </div>
+        <div class="page__body page__body--pad">
+          <div class="card card--plain" id="appealTarget" style="margin-bottom:12px"></div>
+          <div class="field">
+            <label class="field__label">申诉原因</label>
+            <select class="select" id="appealReason">
+              <option>网络故障未能签到</option>
+              <option>签到设备故障</option>
+              <option>突发身体不适</option>
+              <option>临时课程调整</option>
+              <option>其他原因</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field__label">情况说明</label>
+            <textarea class="textarea" id="appealNote" rows="4" placeholder="请说明当时的具体情况，便于管理员核实（不少于 10 个字）"></textarea>
+            <div class="field-hint">每个违约记录最多可申诉 1 次，管理员将在 1 个工作日内处理。</div>
+          </div>
+          <div class="alert alert--info" style="margin-bottom:16px">
+            <span class="alert__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4m0-4h.01"/></svg></span>
+            <span>申诉通过后该违约记录将被撤销，不计入黑名单累计次数。</span>
+          </div>
+          <button class="btn btn--primary btn--block btn--lg" data-action="submit-appeal">提交申诉</button>
+        </div>
+      </section>
+
+      <!-- ===================== 10. 消息通知 ===================== -->
+      <section class="page" data-page="message-list">
+        <div class="navbar">
+          <button class="navbar__back" data-action="back"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg></button>
+          <div class="navbar__title">消息通知</div>
+          <div class="navbar__action"><button class="link-btn" data-action="read-all">全部已读</button></div>
+        </div>
+        <div class="page__body page__body--pad">
+          <div class="chip-scroll" id="msgFilters"></div>
+          <div id="msgList" class="stack-10"></div>
+        </div>
+      </section>
+
+      <!-- ===================== 11. 个人中心 ===================== -->
+      <section class="page" data-page="profile">
+        <div class="page__body page__body--nav">
+          <div class="profile-head">
+            <div class="profile-head__id">
+              <div class="avatar">张</div>
+              <div>
+                <div class="profile-head__name">张三</div>
+                <div class="profile-head__sno">学号 2024010101 · 信息工程学院</div>
+              </div>
+            </div>
+          </div>
+          <div class="profile-body">
+            <div class="profile-stats">
+              <div class="profile-stat"><div class="profile-stat__num" id="pStatTotal">0</div><div class="profile-stat__label">累计预约</div></div>
+              <div class="profile-stat"><div class="profile-stat__num" style="color:var(--ok-600)">86<small style="font-size:11px">h</small></div><div class="profile-stat__label">累计时长</div></div>
+              <div class="profile-stat"><div class="profile-stat__num" id="pStatViolation" style="color:var(--danger-600)">0</div><div class="profile-stat__label">违约次数</div></div>
+            </div>
+
+            <div class="stack-10" style="margin-top:14px">
+              <button class="list-item" style="width:100%;text-align:left" data-action="go" data-target="history-list">
+                <span class="list-item__icon list-item__icon--brand"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+                <span class="grow"><span class="list-item__title">我的预约历史</span><span class="list-item__sub" style="display:block">查看全部历史预约与状态</span></span>
+                <svg class="list-item__chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
+              </button>
+              <button class="list-item" style="width:100%;text-align:left" data-action="go" data-target="violation-list">
+                <span class="list-item__icon list-item__icon--danger"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span>
+                <span class="grow"><span class="list-item__title">违约记录</span><span class="list-item__sub" style="display:block">累计违约 <b id="pViol" style="color:var(--danger-600)">0 次</b>，满 3 次禁止预约 7 天</span></span>
+                <svg class="list-item__chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
+              </button>
+              <button class="list-item" style="width:100%;text-align:left" data-action="go" data-target="message-list">
+                <span class="list-item__icon list-item__icon--warn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 0 0-4-5.66V5a2 2 0 1 0-4 0v.34C7.67 6.17 6 8.39 6 11v3.16c0 .54-.21 1.05-.6 1.44L4 17h5m6 0v1a3 3 0 1 1-6 0v-1m6 0H9"/></svg></span>
+                <span class="grow"><span class="list-item__title">消息通知</span><span class="list-item__sub" style="display:block">预约提醒与系统通知</span></span>
+                <span class="badge badge--danger" id="pMsgBadge">1</span>
+              </button>
+              <button class="list-item" style="width:100%;text-align:left" data-action="toggle-theme">
+                <span class="list-item__icon list-item__icon--muted"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+                <span class="grow"><span class="list-item__title">深色模式</span><span class="list-item__sub" style="display:block">夜间阅读更护眼</span></span>
+                <svg class="list-item__chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+
+            <div class="alert alert--danger" style="margin-top:14px">
+              <span class="alert__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span>
+              <span>温馨提示：预约后请按时签到与释放座位。累计违约达 3 次将自动加入黑名单，7 天内无法预约任何座位。</span>
+            </div>
+
+            <button class="btn btn--ghost btn--block" style="margin-top:14px" data-action="logout">退出登录</button>
+            <p class="xsmall muted center" style="margin-top:12px">图书馆阅览座位预约系统 v1.0 · 原型演示</p>
+          </div>
+        </div>
+        <nav class="tabbar">
+          <button class="tabbar__item" data-action="go" data-target="student-home">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.6 12 3l9 7.6M5 9.6V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.6"/></svg>
+            首页
+          </button>
+          <button class="tabbar__item" data-action="go" data-target="my-reservation">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/></svg>
+            我的预约
+          </button>
+          <button class="tabbar__item is-active" data-action="go" data-target="profile">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM12 14a7 7 0 0 0-7 7h14a7 7 0 0 0-7-7z"/></svg>
+            个人中心
+          </button>
+        </nav>
+      </section>
+
+      <!-- ============ 管理员端（独立 Web 后台外壳，宽屏展示，由脚本注入 7 个页面） ============ -->
+      <section class="page" data-page="admin-mount"></section>
+
+      <!-- ===================== 浮层：忘记密码 ===================== -->
+      <div class="overlay overlay--center" data-overlay="forgot">
+        <div class="sheet sheet--dialog">
+          <div class="dialog__icon dialog__icon--info"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div class="dialog__title">忘记密码</div>
+          <p class="dialog__text">请携带本人校园卡到图书馆一楼服务台重置密码，或通过学校统一身份认证平台自助找回。</p>
+          <button class="btn btn--primary btn--block" data-action="close-overlay" data-overlay="forgot">我知道了</button>
+        </div>
+      </div>
+
+      <!-- ===================== 浮层：预约座位 ===================== -->
+      <div class="overlay" data-overlay="booking">
+        <div class="sheet">
+          <div class="sheet__handle"></div>
+          <div class="sheet__title">预约座位</div>
+          <div class="sheet__sub" id="bkSeatSub">--</div>
+
+          <div class="field">
+            <label class="field__label">选择日期</label>
+            <div class="segmented segmented--sm segmented--brand" id="bkDates"></div>
+          </div>
+          <div class="row--gap" style="gap:11px">
+            <div class="field grow">
+              <label class="field__label">开始时间</label>
+              <select class="select" id="bkStart"></select>
+            </div>
+            <div class="field grow">
+              <label class="field__label">预约时长</label>
+              <select class="select" id="bkDuration">
+                <option value="1">1 小时</option>
+                <option value="2" selected>2 小时</option>
+                <option value="3">3 小时</option>
+                <option value="4">4 小时</option>
+              </select>
+            </div>
+          </div>
+          <div class="card card--plain" style="margin-bottom:14px">
+            <div class="kv-list">
+              <div class="kv"><span class="kv__k">座位</span><span class="kv__v" id="bkSummarySeat">--</span></div>
+              <div class="kv"><span class="kv__k">预约时段</span><span class="kv__v" id="bkSummaryTime">--</span></div>
+              <div class="kv"><span class="kv__k">签到窗口</span><span class="kv__v" id="bkSummaryWindow">--</span></div>
+            </div>
+          </div>
+          <div class="alert alert--warn" style="margin-bottom:14px">
+            <span class="alert__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+            <span>提交后请留意签到时间。预约开始前 30 分钟以上可自由取消，进入签到窗口后不可取消。</span>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn--ghost" data-action="close-overlay" data-overlay="booking">取消</button>
+            <button class="btn btn--primary" data-action="confirm-booking">确认预约</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== 浮层：签到确认 ===================== -->
+      <div class="overlay overlay--center" data-overlay="checkin-confirm">
+        <div class="sheet sheet--dialog">
+          <div class="dialog__icon dialog__icon--ok"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></div>
+          <div class="dialog__title">签到成功</div>
+          <p class="dialog__text" id="ciConfirmText">座位状态已更新为「使用中」，请在离开时手动释放座位，方便其他同学使用。</p>
+          <button class="btn btn--primary btn--block" data-action="close-overlay" data-overlay="checkin-confirm" data-then="my-reservation">查看我的预约</button>
+        </div>
+      </div>
+
+      <!-- ===================== 浮层：取消预约 ===================== -->
+      <div class="overlay overlay--center" data-overlay="cancel-confirm">
+        <div class="sheet sheet--dialog">
+          <div class="dialog__icon dialog__icon--danger"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></div>
+          <div class="dialog__title">确认取消预约？</div>
+          <p class="dialog__text">取消后该座位将在预约时段内重新开放给其他同学，本次取消不计入违约。</p>
+          <div class="btn-row">
+            <button class="btn btn--ghost" data-action="close-overlay" data-overlay="cancel-confirm">再想想</button>
+            <button class="btn btn--danger" data-action="do-cancel">确认取消</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== 浮层：释放座位 ===================== -->
+      <div class="overlay overlay--center" data-overlay="release-confirm">
+        <div class="sheet sheet--dialog">
+          <div class="dialog__icon dialog__icon--warn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></div>
+          <div class="dialog__title">确认释放座位？</div>
+          <p class="dialog__text">释放后本次预约将结束，座位立即可被其他同学预约。</p>
+          <div class="btn-row">
+            <button class="btn btn--ghost" data-action="close-overlay" data-overlay="release-confirm">暂不释放</button>
+            <button class="btn btn--ok" data-action="do-release">确认释放</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== 浮层：管理员座位编辑 ===================== -->
+      <div class="overlay overlay--center" data-overlay="seat-edit">
+        <div class="sheet sheet--dialog">
+          <div class="dialog__title" id="seatEditTitle" style="text-align:left;margin-bottom:14px">新增座位</div>
+          <div class="field">
+            <label class="field__label">座位编号</label>
+            <input class="input" id="seatEditNo" placeholder="例如 A2-13">
+          </div>
+          <div class="field">
+            <label class="field__label">所属阅览室</label>
+            <select class="select" id="seatEditRoom"></select>
+          </div>
+          <div class="field">
+            <label class="field__label">所属区域</label>
+            <select class="select" id="seatEditZone">
+              <option>自习区</option>
+              <option>电源区</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field__label">座位状态</label>
+            <select class="select" id="seatEditStatus">
+              <option value="free">空闲（可预约）</option>
+              <option value="booked">已预约</option>
+              <option value="using">使用中</option>
+              <option value="locked">违规锁定（暂停预约）</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn--ghost" data-action="close-overlay" data-overlay="seat-edit">取消</button>
+            <button class="btn btn--primary" data-action="save-seat">保存</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== 浮层：申诉处理 ===================== -->
+      <div class="overlay overlay--center" data-overlay="appeal-handle">
+        <div class="sheet sheet--dialog">
+          <div class="dialog__icon dialog__icon--info" id="appealHandleIcon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="dialog__title" id="appealHandleTitle">确认通过申诉？</div>
+          <p class="dialog__text" id="appealHandleText">通过后该违约记录将被撤销，不计入黑名单累计次数。</p>
+          <div class="field" id="appealHandleReasonWrap">
+            <textarea class="textarea" id="appealHandleReason" rows="2" placeholder="填写处理意见（可选）"></textarea>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn--ghost" data-action="close-overlay" data-overlay="appeal-handle">取消</button>
+            <button class="btn btn--primary" data-action="confirm-appeal-handle">确认提交</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== 浮层：黑名单解除 ===================== -->
+      <div class="overlay overlay--center" data-overlay="blacklist-release">
+        <div class="sheet sheet--dialog">
+          <div class="dialog__icon dialog__icon--warn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></div>
+          <div class="dialog__title">人工解除黑名单？</div>
+          <p class="dialog__text" id="blacklistReleaseText">解除后该学生可立即重新预约座位，该操作将记入管理员操作日志。</p>
+          <div class="btn-row">
+            <button class="btn btn--ghost" data-action="close-overlay" data-overlay="blacklist-release">取消</button>
+            <button class="btn btn--primary" data-action="confirm-blacklist-release">确认解除</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== 浮层：预约详情（管理员） ===================== -->
+      <div class="overlay overlay--center" data-overlay="res-detail">
+        <div class="sheet sheet--dialog">
+          <div class="dialog__title" style="text-align:left;margin-bottom:12px">预约详情</div>
+          <div class="kv-list" id="resDetailBody"></div>
+          <div class="btn-row" style="margin-top:16px">
+            <button class="btn btn--ghost btn--block" data-action="close-overlay" data-overlay="res-detail">关闭</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="toast" id="toast"></div>
+    </div>
+  </div>
+
+  <div class="demo-nav" id="demoNav"></div>
+
+  <button class="fab-list" id="fabList" data-action="toggle-list" title="显示 / 隐藏页面清单">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    页面清单
+  </button>
+</div>
+<script src="./js/app.js"></script>
+</body>
+</html>
